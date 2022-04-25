@@ -3,6 +3,7 @@ const {
   delById,
   addNewEmployee,
   editOldEmployee,
+  getEmployeeByUserName,
 } = require("../service/employee.service");
 
 class EmployeeController {
@@ -73,6 +74,17 @@ class EmployeeController {
         msg: "编辑失败",
       };
     }
+  }
+
+  async getInfoByName(ctx, next) {
+    const { username } = ctx.request.query;
+    const result = await getEmployeeByUserName(username);
+    delete result.password;
+    ctx.body = {
+      code: 200,
+      msg: "查询成功",
+      data: result,
+    };
   }
 }
 
