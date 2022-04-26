@@ -23,10 +23,12 @@ class RoomController {
       }
       const type = {};
       roomType.forEach((item) => {
-        type[item.id] = item.name;
+        type[item.id] = { name: item.name, price: item.price };
       });
-      item["room_type_text"] = type[item["room_type_id"]];
+      item["room_type_text"] = type[item["room_type_id"]]["name"];
+      item["room_price"] = type[item["room_type_id"]]["price"];
     });
+
     ctx.body = {
       code: 200,
       msg: "查询成功",

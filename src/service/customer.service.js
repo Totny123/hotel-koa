@@ -1,7 +1,7 @@
 const connection = require("../app/database");
 
 class CustomerService {
-  async getCustomerList(pageNum, pageSize) {
+  async getCustomerList(pageNum = 1, pageSize = 99999) {
     const offset = String((pageNum - 1) * pageSize);
     pageSize = String(pageSize);
     const statement = `SELECT * FROM customer LIMIT ?,?;`;
